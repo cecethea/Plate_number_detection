@@ -21,13 +21,13 @@ image_test = images_name_source[0]
 class GeometricTransformations:
     """ Geometric Transformations of images """
 
-    def __init__(self, images_name=None):
-        """ initialize data"""
-        self.images = images_name
+    # def __init__(self, images_name=None):
+    #     """ initialize data"""
+    #     self.images = images_name
 
     @classmethod
     def translation(self, image_name):
-        """ Images translation function"""
+        """ Images translation function """
         image_gray = cv.imread(images_source_path + image_name, 0)
         rows, cols = image_gray.shape[:2]
         M = np.float32([[1, 0, 100], [0, 1, 50]])
@@ -37,7 +37,7 @@ class GeometricTransformations:
 
     @classmethod
     def rotation(self, image_name):
-        """ Images rotation function"""
+        """ Images rotation function """
         image_gray = cv.imread(images_source_path + image_name, 0)
         rows, cols = image_gray.shape[:2]
         # cols-1 and rows-1 are the coordinate limits.
@@ -60,11 +60,24 @@ class GeometricTransformations:
         plt.imshow(image_rotation)
         plt.show()
 
-    def rotation_translation(self, image_name):
-        ''' '''
+    def perspective_transformation(self, image_name):
+        """ Perspective transformation  """
+        image_gray = cv.imread(images_source_path + image_name, 0)
+        rows, cols = image_gray.shape
+        pts1 = np.float32([[56, 65], [368, 52], [28, 387], [389, 390]])
+        pts2 = np.float32([[0, 0], [300, 0], [0, 300], [300, 300]])
+        matrix_perspective = cv.getPerspectiveTransform(pts1, pts2)
+        image_perspective = cv.warpPerspective(image_gray, matrix_perspective, (300, 300))
+        # input image
+        plt.subplot(121), plt.imshow(image_gray), plt.title('Input')
+        # Output image
+        plt.subplot(122), plt.imshow(image_perspective), plt.title('Output')
+        # Show function
+        plt.show()
 
 
 if __name__ == "__main__":
     change_images = GeometricTransformations()
     change_images.translation(image_test)
     change_images.rotation(image_test)
+    change_images.perspective_transformation(image_test)

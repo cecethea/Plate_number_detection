@@ -1,4 +1,3 @@
-import os
 import numpy as np
 import cv2 as cv
 
@@ -37,10 +36,11 @@ class GeometricTransformations:
         image_perspective = cv.warpPerspective(image_gray, matrix_perspective, (cols, rows))
         return image_perspective
 
+    @classmethod
     def media_bleu_images(self, image_name):
         """ Images Bleu transformation """
         image_gray = cv.imread(image_name)
-        rows, cols, ch = image_gray.shape
+        rows, cols = image_gray.shape
         image_bleu = cv.blur(image_gray, (5, 5))
         image_bleu = cv.flip(image_bleu, -1)
         return image_bleu

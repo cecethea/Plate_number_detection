@@ -10,7 +10,7 @@ class GeometricTransformations:
     def resized_images(self, images_name):
         """ This function resized the images """
         img = cv.imread(images_name, cv.IMREAD_UNCHANGED)
-        scale_percent = random.choice([20, 10, 35, 9, 17])
+        scale_percent = random.choice([10, 15, 18, 19, 17])
         width = int(img.shape[1] * scale_percent / 100)
         height = int(img.shape[0] * scale_percent / 100)
         dim = (width, height)
@@ -67,8 +67,8 @@ class GeometricTransformations:
         print(small_img.shape)
         rows = rows * 2
         cols = cols * 2
-        large_image = cv.resize(large_image, (cols, rows), interpolation=cv.INTER_AREA)
-        scale_percent = 50
+        large_image = cv.resize(large_image, (cols * 2, rows * 2), interpolation=cv.INTER_AREA)
+        scale_percent = random.choice([210, 250, 200, 235, 180, 190])
         x_offset = int(small_img.shape[1] * scale_percent / 100)
         y_offset = int(small_img.shape[0] * scale_percent / 100)
         large_image[y_offset:y_offset + small_img.shape[0],

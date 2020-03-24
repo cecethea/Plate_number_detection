@@ -44,7 +44,7 @@ def resized_all_images():
             print("Directory ", images_dest_folder, " already exists")
 
         try:
-            cv.imwrite(os.path.join(path_data + images_dest_folder, sources_images[i] + 'RE' + '.jpg'), image_resized)
+            cv.imwrite(os.path.join(path_data + images_dest_folder, sources_images[i] + '.jpg'), image_resized)
             print(" File ", sources_images[i], " Created ")
         except FileExistsError:
             print(" File ", sources_images[i], " already exists ")
@@ -74,5 +74,5 @@ def create_fond_all_images():
             print(" File ", sources_images[i], " already exists ")
 
 
-# resized_all_images()
+#resized_all_images()
 create_fond_all_images()
